@@ -46,15 +46,20 @@ INSTALLED_APPS = [
 
     # local apps
     "accounts",
+    "orders",
+    "carts",
+    "products",
 
     # third-party apps
-    'rest_framework',
-    'dj_rest_auth',
-    'allauth',
-    'allauth.account',
-    'allauth.socialaccount',
-    'allauth.socialaccount.providers.google',
-    'allauth.socialaccount.providers.github',
+    "rest_framework",
+    "dj_rest_auth",
+    "allauth",
+    "allauth.account",
+    "allauth.socialaccount",
+    "allauth.socialaccount.providers.google",
+    "allauth.socialaccount.providers.github",
+
+    "phonenumber_field",
 ]
 
 MIDDLEWARE = [
@@ -140,6 +145,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = "static/"
+MEDIA_URL = "media/"
+
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
@@ -155,7 +164,7 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 AUTH_USER_MODEL = "accounts.Customer"
 
 GOOGLE_CALLBACK_URL = "google-callback"
-GITHUB_CALLBACK_URL = "https://a34b-102-215-77-202.ngrok-free.app/github-callback"
+GITHUB_CALLBACK_URL = "github-callback"
 
 # allauth settings
 SOCIALACCOUNT_PROVIDERS = {
