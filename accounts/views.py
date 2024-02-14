@@ -29,7 +29,7 @@ def google_callback(request):
         params={
             "client_id": settings.GOOGLE_CLIENT_ID,
             "client_secret": settings.GOOGLE_CLIENT_SECRET,
-            "redirect_uri": "https://a34b-102-215-77-202.ngrok-free.app/google-callback",
+            "redirect_uri": request.build_absolute_uri(reverse("google-callback")),
             "grant_type": "authorization_code",
             "code": code,
         },
