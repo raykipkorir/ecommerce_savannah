@@ -9,16 +9,17 @@ Technical Backend Challenge
 - Docker and docker-compose
 - GitHub Actions
 
-## OpenID Connect - Social Authentication
-Users can login using Google or Github
+## Authentication
+Users can sign up and login using Google or Github
 
 ## Static and media files
 Integrated Amazon S3 to serve static and media files
 
 ## Tests
-Backend test coverage - 
+Backend test coverage - 96%
 
 ## CI/CD
-Integrated Github Actions 
+Integrated Github Actions
 
+## Deployment
 Deployed on Amazon EC2 instance
