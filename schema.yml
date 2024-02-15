@@ -1,32 +1,13 @@
 openapi: 3.0.3
 info:
-  title: ''
-  version: 0.0.0
+  title: Ecommerce Savannah API
+  version: 1.0.0
+  description: Ecommerce Savannah API
 paths:
   /api/github/:
     post:
       operationId: api_github_create
-      description: |-
-        class used for social authentications
-        example usage for facebook with access_token
-        -------------
-        from allauth.socialaccount.providers.facebook.views import FacebookOAuth2Adapter
-
-        class FacebookLogin(SocialLoginView):
-            adapter_class = FacebookOAuth2Adapter
-        -------------
-
-        example usage for facebook with code
-
-        -------------
-        from allauth.socialaccount.providers.facebook.views import FacebookOAuth2Adapter
-        from allauth.socialaccount.providers.oauth2.client import OAuth2Client
-
-        class FacebookLogin(SocialLoginView):
-            adapter_class = FacebookOAuth2Adapter
-            client_class = OAuth2Client
-            callback_url = 'localhost:8000'
-        -------------
+      description: GitHub login
       tags:
       - api
       requestBody:
@@ -54,6 +35,7 @@ paths:
   /api/github-callback/:
     get:
       operationId: api_github_callback_retrieve
+      description: Github callback
       tags:
       - api
       security:
@@ -66,27 +48,7 @@ paths:
   /api/google/:
     post:
       operationId: api_google_create
-      description: |-
-        class used for social authentications
-        example usage for facebook with access_token
-        -------------
-        from allauth.socialaccount.providers.facebook.views import FacebookOAuth2Adapter
-
-        class FacebookLogin(SocialLoginView):
-            adapter_class = FacebookOAuth2Adapter
-        -------------
-
-        example usage for facebook with code
-
-        -------------
-        from allauth.socialaccount.providers.facebook.views import FacebookOAuth2Adapter
-        from allauth.socialaccount.providers.oauth2.client import OAuth2Client
-
-        class FacebookLogin(SocialLoginView):
-            adapter_class = FacebookOAuth2Adapter
-            client_class = OAuth2Client
-            callback_url = 'localhost:8000'
-        -------------
+      description: Google login
       tags:
       - api
       requestBody:
@@ -114,6 +76,7 @@ paths:
   /api/google-callback/:
     get:
       operationId: api_google_callback_retrieve
+      description: Google callback
       tags:
       - api
       security:
