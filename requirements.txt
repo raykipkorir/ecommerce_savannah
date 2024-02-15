@@ -10,9 +10,11 @@ distlib==0.3.8
 dj-rest-auth==5.0.2
 Django==5.0.2
 django-allauth==0.57.2
+django-debug-toolbar==4.3.0
 django-phonenumber-field==7.3.0
 djangorestframework==3.14.0
 djangorestframework-simplejwt==5.3.1
+drf-nested-routers==0.93.5
 filelock==3.13.1
 identify==2.5.34
 idna==3.6
