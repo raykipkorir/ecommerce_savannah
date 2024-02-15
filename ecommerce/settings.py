@@ -61,6 +61,7 @@ INSTALLED_APPS = [
 
     "phonenumber_field",
     "debug_toolbar",
+    "drf_spectacular",
 ]
 
 MIDDLEWARE = [
@@ -166,7 +167,8 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 AUTH_USER_MODEL = "accounts.Customer"
 
 GOOGLE_CALLBACK_URL = "google-callback"
-GITHUB_CALLBACK_URL = "github-callback"
+# to be revisited
+GITHUB_CALLBACK_URL = "https://a34b-102-215-77-202.ngrok-free.app/api/github-callback/"
 
 # allauth settings
 SOCIALACCOUNT_PROVIDERS = {
@@ -195,14 +197,17 @@ GOOGLE_CLIENT_SECRET = config("GOOGLE_CLIENT_SECRET")
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'dj_rest_auth.jwt_auth.JWTCookieAuthentication',
-    )
+    ),
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
 }
 
 # dj-rest-auth settings
 REST_AUTH = {
     "USE_JWT": True,
     "JWT_AUTH_HTTPONLY": False,
-    "TOKEN_MODEL": None
+    "TOKEN_MODEL": None,
+    "JWT_AUTH_COOKIE": "jwt-auth",
+    "JWT_AUTH_REFRESH_COOKIE": "jwt-auth-refresh",
 }
 
 # simple jwt settings
@@ -213,9 +218,16 @@ SIMPLE_JWT = {
     "BLACKLIST_AFTER_ROTATION": True,
 }
 
-
 # django debug toolbar settings
 INTERNAL_IPS = [
     "127.0.0.1",
     "localhost",
 ]
+
+# drf spectacular settings
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'Ecommerce Savannah API',
+    'DESCRIPTION': 'Ecommerce Savannah API',
+    'VERSION': '1.0.0',
+    'SERVE_INCLUDE_SCHEMA': False,
+}
