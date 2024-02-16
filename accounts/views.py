@@ -4,9 +4,10 @@ from allauth.socialaccount.providers.google.views import GoogleOAuth2Adapter
 from allauth.socialaccount.providers.oauth2.client import OAuth2Client
 from dj_rest_auth.registration.views import SocialLoginView
 from django.conf import settings
+from django.contrib.auth.signals import user_logged_in
 from django.urls import reverse
-from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework.views import APIView
 
 
 class GoogleLogin(SocialLoginView):
@@ -15,12 +16,22 @@ class GoogleLogin(SocialLoginView):
     callback_url = settings.GOOGLE_CALLBACK_URL
     client_class = OAuth2Client
 
+    def post(self, request, *args, **kwargs):
+        response = super().post(request, *args, **kwargs)
+        user_logged_in.send(sender=request.user.__class__, request=request, user=request.user)
+        return response
+
 
 class GitHubLogin(SocialLoginView):
     """GitHub login"""
     adapter_class = GitHubOAuth2Adapter
     callback_url = settings.GITHUB_CALLBACK_URL
     client_class = OAuth2Client
+
+    def post(self, request, *args, **kwargs):
+        response = super().post(request, *args, **kwargs)
+        user_logged_in.send(sender=request.user.__class__, request=request, user=request.user)
+        return response
 
 
 class GoogleCallback(APIView):
