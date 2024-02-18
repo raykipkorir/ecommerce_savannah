@@ -10,6 +10,7 @@ User = get_user_model()
 class Order(models.Model):
     ORDER_STATUS = (
         ("Acknowledged", "Acknowledged"),
+        ("Cancelled", "Cancelled"),
         ("Shipped", "Shipped"),
         ("Delivered", "Delivered"),
     )
@@ -23,7 +24,7 @@ class Order(models.Model):
     product = models.ManyToManyField(Product, through="orders.OrderItem")
 
     def __str__(self):
-        return f"{self.customer.username}'s order"
+        return f"{self.customer.get_username()}'s order"
 
 
 class OrderItem(models.Model):
@@ -31,3 +32,6 @@ class OrderItem(models.Model):
 
     order = models.ForeignKey(Order, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.DO_NOTHING)
+
+    def __str__(self):
+        return f"{self.product} in {self.order.customer.get_username()}'s order"

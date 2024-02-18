@@ -227,6 +227,10 @@ SPECTACULAR_SETTINGS = {
     'SERVE_INCLUDE_SCHEMA': False,
 }
 
+# africa's talking settings
+AFRICAS_TALKING_USERNAME = config("AFRICAS_TALKING_USERNAME")
+AFRICAS_TALKING_API_KEY = config("AFRICAS_TALKING_API_KEY")
+
 # aws settings
 USE_S3 = config("USE_S3", cast=bool, default=False)
 
