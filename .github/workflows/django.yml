@@ -31,5 +31,6 @@ jobs:
       env:
         GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
         GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
+        USE_S3: False
       run: |
         python manage.py test
