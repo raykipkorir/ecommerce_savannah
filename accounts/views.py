@@ -52,7 +52,6 @@ class GoogleCallback(APIView):
         res = requests.post(
             request.build_absolute_uri(reverse("google-login")),
             data={"access_token": res.json()["access_token"]},
-            timeout=30,
         )
         return Response(res.json())
 
@@ -64,6 +63,5 @@ class GithubCallback(APIView):
         res = requests.post(
             request.build_absolute_uri(reverse("github-login")),
             data={"code": code},
-            timeout=30,
         )
         return Response(res.json())
