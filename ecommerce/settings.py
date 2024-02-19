@@ -163,7 +163,7 @@ AUTH_USER_MODEL = "accounts.Customer"
 
 GOOGLE_CALLBACK_URL = "google-callback"
 # to be revisited
-GITHUB_CALLBACK_URL = config("GITHUB_CALLBACK_URL")
+GITHUB_CALLBACK_URL = config("OAUTH_GITHUB_CALLBACK_URL")
 
 # allauth settings
 SOCIALACCOUNT_PROVIDERS = {
