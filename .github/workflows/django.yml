@@ -34,6 +34,8 @@ jobs:
         AFRICAS_TALKING_USERNAME: ${{ secrets.AFRICAS_TALKING_USERNAME }}
         AFRICAS_TALKING_API_KEY: ${{ secrets.AFRICAS_TALKING_API_KEY }}
         OAUTH_GITHUB_CALLBACK_URL: ${{ secrets.OAUTH_GITHUB_CALLBACK_URL }}
+        EMAIL_HOST_USER: ${{ secrets.EMAIL_HOST_USER }}
+        EMAIL_HOST_PASSWORD: ${{ secrets.EMAIL_HOST_PASSWORD }}
         USE_S3: False
       run: |
         python manage.py test
