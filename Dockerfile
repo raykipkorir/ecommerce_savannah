@@ -13,7 +13,10 @@ RUN pip install --upgrade pip
 COPY ./requirements.txt /app/
 RUN pip install -r requirements.txt
 
-COPY ./scripts/start.sh /start-app.sh
-RUN chmod +x /start-app.sh
-
 COPY . /app
+
+COPY /scripts/start.sh /start.sh
+RUN sed -i 's/\r$//' /start.sh && \
+    chmod +x /start.sh
+
+ENTRYPOINT ["sh", "-c", "/start.sh"]
