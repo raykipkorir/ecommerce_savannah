@@ -8,6 +8,7 @@ Backend Technical challenge
 - Amazon S3
 - Docker and docker-compose
 - GitHub Actions
+- Africa's talking
 
 ## API documentation
 - [Swagger documentation](https://ecommerce-savannah.onrender.com/api/schema/swagger/)
