@@ -2,9 +2,12 @@ from django.contrib import admin
 from django.urls import include, path
 from drf_spectacular.views import SpectacularAPIView, SpectacularRedocView, SpectacularSwaggerView
 
+from accounts.views import home_page
+
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("__debug__/", include("debug_toolbar.urls")),
+    path("", home_page),
 
     # api docs
     path('api/schema/', SpectacularAPIView.as_view(), name='schema'),
