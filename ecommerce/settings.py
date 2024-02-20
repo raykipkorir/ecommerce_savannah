@@ -15,6 +15,7 @@ from datetime import timedelta
 from pathlib import Path
 
 from decouple import Csv, config
+from dj_database_url import parse as db_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -103,14 +104,11 @@ WSGI_APPLICATION = "ecommerce.wsgi.application"
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 DATABASES = {
-    "default": {
-        "ENGINE": config("DB_ENGINE", "django.db.backends.sqlite3"),
-        "NAME": config("DB_NAME", os.path.join(BASE_DIR, "db.sqlite3")),
-        "USER": config("DB_USER", None),
-        "PASSWORD": config("DB_PASSWORD", None),
-        "HOST": config("DB_HOST", None),
-        "PORT": config("DB_PORT", None),
-    }
+    'default': config(
+        'DATABASE_URL',
+        default='sqlite:///db.sqlite3',
+        cast=db_url
+    )
 }
 
 
