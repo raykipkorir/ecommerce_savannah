@@ -70,5 +70,5 @@ class TestProductViewSet(APITestCase):
 
     def test_product_delete_api(self) -> None:
         authenticate_as_admin(self.client)
-        response = self.client.delete(reverse("products-detail", kwargs={"pk": 1}))
+        response = self.client.delete(reverse("products-detail", kwargs={"pk": self.product.pk}))
         self.assertEqual(response.status_code, 204)
