@@ -5,6 +5,7 @@ from allauth.socialaccount.providers.oauth2.client import OAuth2Client
 from dj_rest_auth.registration.views import SocialLoginView
 from django.conf import settings
 from django.contrib.auth.signals import user_logged_in
+from django.shortcuts import render
 from django.urls import reverse
 from rest_framework.generics import GenericAPIView
 from rest_framework.response import Response
@@ -75,3 +76,7 @@ class ConfirmEmailAPI(GenericAPIView):
             data={"key": key}
         )
         return Response(res.json(), status=res.status_code)
+
+
+def home_page(request):
+    return render(request, "index.html")
