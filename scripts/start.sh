@@ -7,4 +7,4 @@ python manage.py migrate
 
 python manage.py collectstatic --noinput
 
-gunicorn ecommerce.wsgi -t 1200 --keep-alive 1200 -b 0.0.0.0:8000
+gunicorn ecommerce.wsgi -t 300 --keep-alive 300 -b 0.0.0.0:8000
