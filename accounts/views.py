@@ -40,16 +40,15 @@ class GoogleCallback(APIView):
     def get(self, request, *args, **kwargs):
         code = request.GET.get("code")
         res = requests.post(
-        "https://accounts.google.com/o/oauth2/token",
-        params={
-            "client_id": settings.GOOGLE_CLIENT_ID,
-            "client_secret": settings.GOOGLE_CLIENT_SECRET,
-            "redirect_uri": request.build_absolute_uri(reverse("google-callback")),
-            "grant_type": "authorization_code",
-            "code": code,
-        },
-        timeout=30
-    )
+            "https://accounts.google.com/o/oauth2/token",
+            params={
+                "client_id": settings.GOOGLE_CLIENT_ID,
+                "client_secret": settings.GOOGLE_CLIENT_SECRET,
+                "redirect_uri": request.build_absolute_uri(reverse("google-callback")),
+                "grant_type": "authorization_code",
+                "code": code,
+            },
+        )
         res = requests.post(
             request.build_absolute_uri(reverse("google-login")),
             data={"access_token": res.json()["access_token"]},
