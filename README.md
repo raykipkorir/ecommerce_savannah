@@ -1,6 +1,11 @@
 # Ecommerce Savannah
-Backend Technical challenge
-
+#### Backend Technical challenge
+### Available functionalities
+1. Users can sign in via Google or GitHub. Once signed in a cart instance is created.
+2. Users can add products to cart as well as increment or decrement the quantity of the product in cart.
+3. Once the product is added to cart, users can make an order. An SMS will be sent to the phone number provided by the user acknowledging the order made.
+4. Staff and admin can update the status of the user's order.
+   
 ## Tech stack
 - Django
 - PostgreSQL
