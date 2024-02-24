@@ -9,7 +9,7 @@ cfgv==3.4.0
 charset-normalizer==3.3.2
 contextlib2==21.6.0
 coverage==7.4.1
-cryptography==42.0.2
+cryptography==42.0.4
 defusedxml==0.7.1
 distlib==0.3.8
 dj-database-url==2.1.0
