@@ -14,6 +14,7 @@ import os
 from datetime import timedelta
 from pathlib import Path
 
+import sentry_sdk
 from decouple import Csv, config
 from dj_database_url import parse as db_url
 
@@ -285,3 +286,11 @@ EMAIL_USE_TLS = True
 
 # cors headers
 CORS_ALLOW_ALL_ORIGINS = True
+
+
+# sentry settings
+sentry_sdk.init(
+    dsn=config("SENTRY_DSN"),
+    traces_sample_rate=1.0,
+    profiles_sample_rate=1.0,
+)
