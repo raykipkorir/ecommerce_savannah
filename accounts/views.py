@@ -7,6 +7,7 @@ from django.conf import settings
 from django.contrib.auth.signals import user_logged_in
 from django.shortcuts import render
 from django.urls import reverse
+from rest_framework import status
 from rest_framework.generics import GenericAPIView
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -40,32 +41,38 @@ class GoogleCallback(APIView):
     """Google callback"""
     def get(self, request, *args, **kwargs):
         code = request.GET.get("code")
-        res = requests.post(
-            "https://accounts.google.com/o/oauth2/token",
-            params={
-                "client_id": settings.GOOGLE_CLIENT_ID,
-                "client_secret": settings.GOOGLE_CLIENT_SECRET,
-                "redirect_uri": request.build_absolute_uri(reverse("google-callback")),
-                "grant_type": "authorization_code",
-                "code": code,
-            },
-        )
-        res = requests.post(
-            request.build_absolute_uri(reverse("google-login")),
-            data={"access_token": res.json()["access_token"]},
-        )
-        return Response(res.json())
+        if code:
+            res = requests.post(
+                "https://accounts.google.com/o/oauth2/token",
+                params={
+                    "client_id": settings.GOOGLE_CLIENT_ID,
+                    "client_secret": settings.GOOGLE_CLIENT_SECRET,
+                    "redirect_uri": request.build_absolute_uri(reverse("google-callback")),
+                    "grant_type": "authorization_code",
+                    "code": code,
+                },
+            )
+            res = requests.post(
+                request.build_absolute_uri(reverse("google-login")),
+                data={"access_token": res.json()["access_token"]},
+            )
+            return Response(res.json())
+
+        return Response({"error": "Access denied"}, status=status.HTTP_403_FORBIDDEN)
 
 
 class GithubCallback(APIView):
     """Github callback"""
     def get(self, request, *args, **kwargs):
         code = request.GET.get("code")
-        res = requests.post(
-            request.build_absolute_uri(reverse("github-login")),
-            data={"code": code},
-        )
-        return Response(res.json())
+        if code:
+            res = requests.post(
+                request.build_absolute_uri(reverse("github-login")),
+                data={"code": code},
+            )
+            return Response(res.json())
+
+        return Response({"error": "Access denied"}, status=status.HTTP_403_FORBIDDEN)
 
 
 class ConfirmEmailAPI(GenericAPIView):
