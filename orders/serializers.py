@@ -28,7 +28,7 @@ class CreateOrderSerializer(serializers.ModelSerializer):
             raise ValidationError({"detail": "No product in cart"})
         total_amount = sum([cart_item.product.price * cart_item.quantity for cart_item in cart_items])
         order = Order.objects.create(
-            status="Acknowledgd",
+            status="Acknowledged",
             address=validated_data["address"],
             phone_number=validated_data["phone_number"],
             total_amount=total_amount,
@@ -39,6 +39,11 @@ class CreateOrderSerializer(serializers.ModelSerializer):
                 OrderItem(order=order, product=cart_item.product, quantity=cart_item.quantity) for cart_item in cart_items
             ]
         )
+        # decrement quantity in stock after order is made
+        for cart_item in cart_items:
+            cart_item.product.stock -= cart_item.quantity
+            cart_item.product.save()
+
         cart_items.delete()
         # handle payment
 

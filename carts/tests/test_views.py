@@ -13,7 +13,7 @@ class TestCartItemAPI(APITestCase):
         self.product = Product.objects.create(
             name="Laptop",
             price=200000,
-            stock=1,
+            stock=5,
             description="This is the description",
         )
 
