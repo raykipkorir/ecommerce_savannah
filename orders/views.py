@@ -9,9 +9,12 @@ class OrderViewSet(ModelViewSet):
     permission_classes = [CustomOrderPermission]
 
     def get_queryset(self):
-        orders = Order.objects.prefetch_related("customer", "product").filter(
-            customer=self.request.user
-        )
+        if self.request.user.is_staff or self.request.user.is_superuser:
+            orders = Order.objects.prefetch_related("customer", "product").all()
+        else:
+            orders = Order.objects.prefetch_related("customer", "product").filter(
+                customer=self.request.user
+            )
         return orders
 
     def get_serializer_class(self):

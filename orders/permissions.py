@@ -37,4 +37,6 @@ class IsAdminOrOwner(permissions.BasePermission):
             return False
 
     def has_object_permission(self, request, view, obj):
-        return request.user == obj.order.customer
+        if not request.user.is_superuser:
+            return request.user == obj.order.customer
+        return True
