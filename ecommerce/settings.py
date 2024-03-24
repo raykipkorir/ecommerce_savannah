@@ -160,12 +160,17 @@ SITE_ID = 1
 USE_X_FORWARDED_HOST = True
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
+
 # custom user model
 AUTH_USER_MODEL = "accounts.Customer"
 
+
+# client credentials and callback urls
+GOOGLE_CLIENT_ID = config("GOOGLE_CLIENT_ID")
+GOOGLE_CLIENT_SECRET = config("GOOGLE_CLIENT_SECRET")
 GOOGLE_CALLBACK_URL = "google-callback"
-# to be revisited
-GITHUB_CALLBACK_URL = config("OAUTH_GITHUB_CALLBACK_URL")
+GITHUB_CALLBACK_URL = config("OAUTH_GITHUB_CALLBACK_URL") # to be revisited
+
 
 # allauth settings
 SOCIALACCOUNT_PROVIDERS = {
@@ -190,9 +195,6 @@ ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_EMAIL_VERIFICATION = "mandatory"
 
 
-GOOGLE_CLIENT_ID = config("GOOGLE_CLIENT_ID")
-GOOGLE_CLIENT_SECRET = config("GOOGLE_CLIENT_SECRET")
-
 # restframework settings
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
@@ -200,6 +202,7 @@ REST_FRAMEWORK = {
     ),
     'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
 }
+
 
 # dj-rest-auth settings
 REST_AUTH = {
@@ -210,6 +213,7 @@ REST_AUTH = {
     "JWT_AUTH_REFRESH_COOKIE": "jwt-auth-refresh",
 }
 
+
 # simple jwt settings
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(minutes=5),
@@ -218,11 +222,13 @@ SIMPLE_JWT = {
     "BLACKLIST_AFTER_ROTATION": True,
 }
 
+
 # django debug toolbar settings
 INTERNAL_IPS = [
     "127.0.0.1",
     "localhost",
 ]
+
 
 # drf spectacular settings
 SPECTACULAR_SETTINGS = {
@@ -232,13 +238,14 @@ SPECTACULAR_SETTINGS = {
     'SERVE_INCLUDE_SCHEMA': False,
 }
 
+
 # africa's talking settings
 AFRICAS_TALKING_USERNAME = config("AFRICAS_TALKING_USERNAME")
 AFRICAS_TALKING_API_KEY = config("AFRICAS_TALKING_API_KEY")
 
+
 # aws settings
 USE_S3 = config("USE_S3", cast=bool, default=False)
-
 if USE_S3:
     # aws settings
     AWS_ACCESS_KEY_ID = config("AWS_ACCESS_KEY_ID")
