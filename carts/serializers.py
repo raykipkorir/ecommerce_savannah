@@ -21,14 +21,20 @@ class CartItemSerializer(serializers.ModelSerializer):
         except Product.DoesNotExist:
             raise ValidationError({"product_id": "Product not found"})
 
-        if validated_data.get("quantity"):
-            quantity = validated_data.get("quantity")
-        else:
-            quantity = 1
         cart = Cart.objects.get(customer=request.user)
         cart_item = CartItem.objects.filter(cart=cart, product=product).exists()
         if cart_item:
             raise ValidationError({"detail": "Product already in cart"})
+
+        if validated_data.get("quantity"):
+            if product.stock < validated_data.get("quantity"):
+                raise ValidationError({"detail": "Product's stock is not enough"})
+            quantity = validated_data.get("quantity")
+        else:
+            if product.stock < 1:
+                raise ValidationError({"detail": "Product is out of stock"})
+            quantity = 1
+
         cart_item = CartItem.objects.create(
             cart=cart,
             product=product,
