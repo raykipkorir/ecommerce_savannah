@@ -6,10 +6,15 @@ from products.serializers import ProductSerializer
 
 from .models import Cart, CartItem
 
+class CartItemProductSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Product
+        fields = ("id", "name", "price", "image")
+
 
 class CartItemSerializer(serializers.ModelSerializer):
     product_id = serializers.IntegerField(min_value=1, write_only=True)
-    product = ProductSerializer(read_only=True)
+    product = CartItemProductSerializer(read_only=True)
     class Meta:
         model = CartItem
         fields = ("id", "product", "product_id", "quantity")
