@@ -2,6 +2,7 @@ from rest_framework import serializers
 from rest_framework.validators import ValidationError
 
 from carts.models import CartItem
+from products.models import Product
 from products.serializers import ProductSerializer
 
 from .models import Order, OrderItem
@@ -59,9 +60,15 @@ class UpdateOrderSerializer(serializers.ModelSerializer):
         fields = ("id", "status")
 
 
+class OrderItemProductSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Product
+        fields = ("id", "name", "image")
+
+
 class OrderItemSerializer(serializers.ModelSerializer):
-    product = ProductSerializer(read_only=True)
+    product = OrderItemProductSerializer(read_only=True)
 
     class Meta:
         model = OrderItem
-        fields = ("id", "product")
+        fields = ("id", "product", "quantity")
