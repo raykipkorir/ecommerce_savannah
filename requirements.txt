@@ -14,7 +14,7 @@ defusedxml==0.7.1
 distlib==0.3.8
 dj-database-url==2.1.0
 dj-rest-auth==5.0.2
-Django==5.0.2
+Django==5.0.3
 django-allauth==0.57.2
 django-cors-headers==4.3.1
 django-debug-toolbar==4.3.0
