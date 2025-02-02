@@ -25,7 +25,7 @@ djangorestframework-simplejwt==5.3.1
 drf-nested-routers==0.93.5
 drf-spectacular==0.27.1
 filelock==3.13.1
-gunicorn==21.2.0
+gunicorn==22.0.0
 identify==2.5.34
 idna==3.6
 inflection==0.5.1
